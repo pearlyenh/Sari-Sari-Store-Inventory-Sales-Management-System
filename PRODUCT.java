@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class PRODUCT {
     // attributes and feild are exactly the same
     Scanner scanner = new Scanner(System.in);
-    ArrayList<String> product = new ArrayList<>();
+    static ArrayList<String> product = new ArrayList<>();
+    static ArrayList<PRODUCT> products = new ArrayList<>();
 
     int productID;
     String barcode;
@@ -107,7 +108,7 @@ public class PRODUCT {
         return sellingPrice - unitCost;
     }
     public boolean barcodeExists(String barcode){
-        for(Product product : products){
+        for(PRODUCT product : products){
             if(product.getBarcode().equals(barcode)){
                 return true;
             }
@@ -123,6 +124,7 @@ public class PRODUCT {
 
             if (barcode.isEmpty()){
                 System.out.println("\nBarcode is required.");
+                System.out.println("Fill up the barcode.");
             }
             else {
                 break;
@@ -134,5 +136,4 @@ public class PRODUCT {
             }
         }
     }
-}
 
