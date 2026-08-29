@@ -124,14 +124,31 @@ public class PRODUCT {
 
             if (barcode.isEmpty()){
                 System.out.println("\nBarcode is required.");
-                System.out.println("Fill up the barcode.");
             }
             else {
                 break;
             }
 
             boolean exists = false;
+             if (barcode)
+                
+            }
+        }
+            public void addProduct1(){
+        while(true){
+            System.out.println("\n========== ADD PRODUCT ==========");
+            System.out.println("Please input BARCODE: ");
+            barcode = scanner.nextLine().trim();
 
+            if (barcode.isEmpty()){
+                System.out.println("\nBarcode is required.");
+            }
+            else {
+                break;
+            }
+
+            boolean exists = false;
+             if (barcode)
                 
             }
         }
