@@ -134,23 +134,9 @@ public class PRODUCT {
                 
             }
         }
-            public void addProduct1(){
-        while(true){
-            System.out.println("\n========== ADD PRODUCT ==========");
-            System.out.println("Please input BARCODE: ");
-            barcode = scanner.nextLine().trim();
-
-            if (barcode.isEmpty()){
-                System.out.println("\nBarcode is required.");
-            }
-            else {
-                break;
-            }
 
             boolean exists = false;
              if (barcode)
                 
             }
-        }
-    }
 
