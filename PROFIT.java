@@ -1,11 +1,18 @@
 package SARISARISTORE;
+import java.util.Scanner;
 
 public class PROFIT {
 public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+
         System.out.println("Repository");
-        System.out.println("Will code tommorrow, today is the best time to work on this");
-        System.out.println("Tommorrow I promise");
-        System.out.println("Very busy today lol Sep 4");
+        String repost = scanner.next();
+        System.out.println("Hello world");
+
+        System.out.println(repost);
+
+        scanner.close();
 }
     
 }
