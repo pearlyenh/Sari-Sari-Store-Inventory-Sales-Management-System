@@ -19,6 +19,10 @@ public class MAIN{
             case 1:
                 System.out.println("You have done finish the GCR.");               
                 break;
+            case 2:
+                System.out.println("To DO LIST");
+                break;
+            
         
             default:
                 break;
