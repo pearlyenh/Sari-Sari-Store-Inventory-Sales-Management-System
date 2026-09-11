@@ -20,8 +20,14 @@ public class MAIN{
                 System.out.println("You have done finish the GCR.");               
                 break;
             case 2:
+                System.out.println("Quick repository");
+                break;
+            case 3:
                 System.out.println("To DO LIST");
                 break;
+            case 4:
+                System.out.println("To DO LIST");
+                break;                
             
         
             default:
