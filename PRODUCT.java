@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class PRODUCT {
     // attributes and feild are exactly the same
     Scanner scanner = new Scanner(System.in);
-    static ArrayList<String> product = new ArrayList<>();
     static ArrayList<PRODUCT> products = new ArrayList<>();
 
     //attributes
     int productID;
+    static int nextProductID;
     String barcode;
     String productName;
     String category;
@@ -24,7 +24,6 @@ public class PRODUCT {
 //Getter → gets/reads a value
     PRODUCT(
         //Constructor - initialization (same name as the class and does not have to return a value not even void)
-        int productID,
         String barcode,
         String productName,
         String category,
@@ -33,7 +32,8 @@ public class PRODUCT {
         int quantity,
         int reorderLevel){
           
-        this.productID = productID;
+        this.productID = nextProductID;
+        nextProductID++;
         this.barcode = barcode;
         this.productName = productName;
         this.category = category;
@@ -136,6 +136,7 @@ public class PRODUCT {
                     System.out.println("[1] Yes");
                     System.out.println("[2] No");
                     int ifrestock = scanner.nextInt();
+                    scanner.nextLine();
 
                     switch (ifrestock) {
                         case 1:
@@ -161,25 +162,49 @@ public class PRODUCT {
 
             System.out.println
             ("\nCATEROGY OPTIONS: " +
-            "\n1. Junk Food / Snacks" +
-            "\n2. Canned Goods" +
-            "\n3. Drinks / Beverages" +
-            "\n4. Noodles / Soup" +
-            "\n5. Personal Care" +
-            "\n6. Beauty / Makeup" +
-            "\n7. School Supplies" +
-            "\n8. Household" +
-            "\n9. Grocery / Cooking" +
-            "\n10. Candies / Sweets" +
-            "\n11. Baby Products" +
-            "\n12. Others");
+            "\n1. Food & Snacks" +
+            "\n2. Drinks & Beverages" +
+            "\n3. Personal & Beauty Care" +
+            "\n4. Household Products" +
+            "\n5. School & Office Supplies" +
+            "\n6. Baby Products" +
+            "\n7. Grocery & Cooking" +
+            "\n8. Others");
 
             System.out.println("\nEnter Category Choice: ");
             int cChoice = scanner.nextInt();
 
-            if(cChoice > 12 || cChoice == 0){
-                System.out.println("\nInvalid category");
-                return;
+            switch (cChoice) {
+                case 1:
+                    category = "Food & Snacks";
+                    break;
+                case 2:
+                    category = "Drinks & Beverages";
+                    break;
+                case 3:
+                    category = "Personal & Beauty Care";
+                    break;
+                case 4:
+                    category = "Household Products";
+                    break;
+                case 5:
+                    category = "School & Office Supplies";
+                    break;
+                case 6:
+                    category = "Baby Products";
+                    break;
+                case 7:
+                    category = "Grocery & Cooking";
+                    break;
+                case 8:
+                    category = "Others";
+                    break;
+                default:
+                    if(cChoice > 8 || cChoice == 0){
+                        System.out.println("\nInvalid category");
+                        return;
+                    }
+                    break;
             }
 
             System.out.println("\nPURCHASE TYPE: ");
@@ -263,6 +288,37 @@ public class PRODUCT {
                 System.out.println("Minimum selling price must be greater than unit cost.");
                 return;
             }
+            double profitPerUnit = sellingPrice - unitCost;
+            System.out.println("Profit per Unit: " + profitPerUnit);
+
+            System.out.println("\nEnter low-stock level: ");
+            reorderLevel = scanner.nextInt();
+
+            if (reorderLevel < 0){
+                System.out.println("\nInvalid low-stock level.");
+                return;
+            }
+
+            PRODUCT newProduct = new PRODUCT(
+                barcode,
+                productName,
+                category,
+                unitCost,
+                sellingPrice,
+                initialQuantity,
+                reorderLevel
+            );
+            //add newProduct to products ArrayList
+            products.add(newProduct);
+
+            System.out.println
+            ("\n===== PRODUCT ADDED SUCCESSFULLY =====" + 
+                "Product Name: " + productName +
+                "Category: " + category +
+                "Unit Cost: " + unitCost +
+                "Selling Price: " + sellingPrice +
+                "Quantity: " + initialQuantity +
+                "Profit per Unit: " + profitPerUnit);
     }
 }
 
