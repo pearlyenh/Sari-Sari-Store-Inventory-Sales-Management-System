@@ -11,13 +11,15 @@ public class PRODUCT {
     int productID;
     static int nextProductID;
     String barcode;
-    String productName;
+    static String productName;
     String category;
     double unitCost; //hose much one item costs you to acquire
     double sellingPrice;
     int quantity; //current stock
     int initialQuantity;//original stock when purchased/added
     int reorderLevel;
+
+    static double bundlePrice;
 
 // OOP encapsulation - Constructor → gives the object its starting values
 // Setter → changes/updates a value
@@ -216,10 +218,12 @@ public class PRODUCT {
             double unitCost = 0;
             int totalPieces = 0;
 
+
+
             switch (purchaseType) {
                 case 1:
                     System.out.println("\nPrice per Bundle");
-                    double bundlePrice = scanner.nextDouble();
+                    bundlePrice = scanner.nextDouble();
 
                     if(bundlePrice <= 0){
                         System.out.println("Price must be greater than 0");
@@ -319,6 +323,48 @@ public class PRODUCT {
                 "Selling Price: " + sellingPrice +
                 "Quantity: " + initialQuantity +
                 "Profit per Unit: " + profitPerUnit);
+    }
+    public void restockProduct(){
+        System.out.println("===== RESTOCK PRODUCT =====");
+        System.out.println("\nEnter product barcode: ");
+        String barcode = scanner.nextLine();
+
+        for (PRODUCT product : products){
+            if(!product.getBarcode().matches(barcode)){
+                System.out.println("Product is not found.");
+                System.out.println("Please add the product first");
+                return;
+            }
+        }
+
+        System.out.println("==== PRODUCT INFORMATION ====");
+        System.out.println("Product Name: " + product.productName);
+        System.out.println("Current Stock: " + product.quantity);
+        System.out.println("Current Unit Cost: " + product.unitCost);
+        System.out.println("Selling Price: " + product.sellingPrice);
+
+        System.out.println("\n==== NEW PURCHASE =====");
+        System.out.println("Purhcase Type: ");
+        System.out.println("[1] Bundle / Pack");
+        System.out.println("[2] Individual");
+        int purchaseType = scanner.nextInt();
+
+        switch (purchaseType) {
+            case 1:
+                System.out.println("Price per Bundle: ");
+                bundlePrice = scanner.nextDouble();
+
+                if (bundlePrice <= 0){
+                    System.out.println("Invalid bundle price.");
+                    return;
+                }
+                System.out.println("How many pieces are in each bundle?");
+                piecesPerBundle = scanner.nextInt();
+                break;
+        
+            default:
+                break;
+        }
     }
 }
 
