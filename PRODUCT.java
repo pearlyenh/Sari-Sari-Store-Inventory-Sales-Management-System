@@ -9,9 +9,9 @@ public class PRODUCT {
 
     //attributes
     int productID;
-    static int nextProductID;
+    static int nextProductID = 1;
     String barcode;
-    static String productName;
+    String productName;
     String category;
     double unitCost; //hose much one item costs you to acquire
     double sellingPrice;
@@ -76,6 +76,9 @@ public class PRODUCT {
     }
     public void setCategory(String newCategory){
         this.category = newCategory;
+    }
+    public void setUnitCost(double newUnitCost){
+        this.unitCost = newUnitCost;
     }
     public void setSellingPrice(double newSellingPrice){
         this.sellingPrice = newSellingPrice;
@@ -236,6 +239,7 @@ public class PRODUCT {
                         return;
                     }
                     System.out.println("How many pieces are in each bundle?");
+                    System.out.println("Bisaya version");
                     int piecesPerBundle = scanner.nextInt();
 
                     if(piecesPerBundle <= 0){
@@ -324,46 +328,168 @@ public class PRODUCT {
                 "Quantity: " + initialQuantity +
                 "Profit per Unit: " + profitPerUnit);
     }
-    public void restockProduct(){
-        System.out.println("===== RESTOCK PRODUCT =====");
-        System.out.println("\nEnter product barcode: ");
-        String barcode = scanner.nextLine();
+    public void restockProduct() {
 
-        for (PRODUCT product : products){
-            if(!product.getBarcode().matches(barcode)){
-                System.out.println("Product is not found.");
-                System.out.println("Please add the product first");
-                return;
+        System.out.println("\n===== RESTOCK PRODUCT =====");
+
+        System.out.println("Enter product barcode:");
+        String barcode = scanner.nextLine().trim();
+
+        // FIND PRODUCT USING BARCODE
+        PRODUCT foundProduct = null;
+
+        for (PRODUCT product : products) {
+            if (product.getBarcode().equals(barcode)) {
+                foundProduct = product;
+                break;
             }
         }
 
-        System.out.println("==== PRODUCT INFORMATION ====");
-        System.out.println("Product Name: " + product.productName);
-        System.out.println("Current Stock: " + product.quantity);
-        System.out.println("Current Unit Cost: " + product.unitCost);
-        System.out.println("Selling Price: " + product.sellingPrice);
+        // CHECK IF PRODUCT EXISTS
+        if (foundProduct == null) {
+            System.out.println("\nProduct not found.");
+            System.out.println("Please add the product first.");
+            return;
+        }
 
-        System.out.println("\n==== NEW PURCHASE =====");
-        System.out.println("Purhcase Type: ");
+        System.out.println("\n===== PRODUCT INFORMATION =====");
+
+        System.out.println("Product Name: " + foundProduct.getProductName());
+        System.out.println("Current Stock: " + foundProduct.getQuantity());
+        System.out.println("Current Unit Cost: " + foundProduct.getUnitCost());
+        System.out.println("Selling Price: " + foundProduct.getSellingPrice());
+
+
+        System.out.println("\n===== NEW PURCHASE =====");
+
+        System.out.println("Purchase Type:");
         System.out.println("[1] Bundle / Pack");
         System.out.println("[2] Individual");
+
         int purchaseType = scanner.nextInt();
 
-        switch (purchaseType) {
-            case 1:
-                System.out.println("Price per Bundle: ");
-                bundlePrice = scanner.nextDouble();
 
-                if (bundlePrice <= 0){
-                    System.out.println("Invalid bundle price.");
-                    return;
-                }
-                System.out.println("How many pieces are in each bundle?");
-                piecesPerBundle = scanner.nextInt();
-                break;
-        
-            default:
-                break;
+        double newPurchaseCost = 0;
+        int newQuantity = 0;
+        double newUnitCost = 0;
+
+
+        if (purchaseType == 1) {
+
+            System.out.println("\nPrice per Bundle:");
+            double bundlePrice = scanner.nextDouble();
+
+            if (bundlePrice <= 0) {
+                System.out.println("Invalid bundle price.");
+                return;
+            }
+
+
+            System.out.println("How many bundles did you buy?");
+            int numberOfBundles = scanner.nextInt();
+
+            if (numberOfBundles <= 0) {
+                System.out.println("Invalid number of bundles.");
+                return;
+            }
+
+
+            System.out.println("How many pieces are in each bundle?");
+            int piecesPerBundle = scanner.nextInt();
+
+            if (piecesPerBundle <= 0) {
+                System.out.println("Invalid number of pieces.");
+                return;
+            }
+
+
+            // CALCULATE NEW PURCHASE COST
+            newPurchaseCost = bundlePrice * numberOfBundles;
+
+            // CALCULATE NEW QUANTITY
+            newQuantity = numberOfBundles * piecesPerBundle;
+
+            // CALCULATE NEW UNIT COST
+            newUnitCost = newPurchaseCost / newQuantity;
+
+
+        } else if (purchaseType == 2) {
+
+            System.out.println("\nPrice per Piece:");
+            double pricePerPiece = scanner.nextDouble();
+
+            if (pricePerPiece <= 0) {
+                System.out.println("Invalid price.");
+                return;
+            }
+
+
+            System.out.println("How many pieces did you buy?");
+            int quantityBought = scanner.nextInt();
+
+            if (quantityBought <= 0) {
+                System.out.println("Invalid quantity.");
+                return;
+            }
+
+
+            // SET NEW QUANTITY
+            newQuantity = quantityBought;
+
+            // SET NEW UNIT COST
+            newUnitCost = pricePerPiece;
+
+            // CALCULATE NEW PURCHASE COST
+            newPurchaseCost = pricePerPiece * quantityBought;
+
+
+        } else {
+
+            System.out.println("Invalid purchase type.");
+            return;
+        }
+
+
+        // CALCULATE OLD INVENTORY COST
+        double oldInventoryCost =
+                foundProduct.getQuantity() * foundProduct.getUnitCost();
+
+
+        // CALCULATE COMBINED INVENTORY COST
+        double combinedInventoryCost = oldInventoryCost + newPurchaseCost;
+
+        // CALCULATE COMBINED QUANTITY
+        int combinedQuantity = foundProduct.getQuantity() + newQuantity;
+
+        // CALCULATE UPDATED AVERAGE UNIT COST
+        double updatedUnitCost = combinedInventoryCost / combinedQuantity;
+
+        System.out.println("\n===== RESTOCK SUMMARY =====");
+        System.out.println("Previous Stock: " + foundProduct.getQuantity());
+        System.out.println("New Stock Added: " + newQuantity);
+        System.out.println("Updated Stock: " + combinedQuantity);
+
+        System.out.println("Previous Unit Cost: " + foundProduct.getUnitCost());
+        System.out.println("New Purchase Unit Cost: " + newUnitCost);
+        System.out.println("Updated Average Unit Cost: " + updatedUnitCost);
+
+        System.out.println("\nDo you want to continue with the restock?");
+        System.out.println("[1] Yes");
+        System.out.println("[2] No");
+        int confirmation = scanner.nextInt();
+
+        if (confirmation == 1) {
+
+            foundProduct.increaseStock(newQuantity);
+
+            foundProduct.setUnitCost(updatedUnitCost);
+
+            System.out.println("\nProduct restocked successfully.");
+            System.out.println("Updated Stock: " + foundProduct.getQuantity());
+            System.out.println("Updated Unit Cost: " + foundProduct.getUnitCost());
+
+        } else {
+            System.out.println("\nRestock cancelled.");
         }
     }
 }
