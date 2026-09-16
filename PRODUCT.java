@@ -177,6 +177,7 @@ public class PRODUCT {
             "\n8. Others");
 
             System.out.println("\nEnter Category Choice: ");
+            System.out.println("//Bisaya Version");
             int cChoice = scanner.nextInt();
 
             switch (cChoice) {
