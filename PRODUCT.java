@@ -475,6 +475,7 @@ public class PRODUCT {
         System.out.println("Updated Average Unit Cost: " + updatedUnitCost);
 
         System.out.println("\nDo you want to continue with the restock?");
+        System.out.println("//Bisaya version of this one...");
         System.out.println("[1] Yes");
         System.out.println("[2] No");
         int confirmation = scanner.nextInt();
