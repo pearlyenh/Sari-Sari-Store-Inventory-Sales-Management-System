@@ -472,6 +472,7 @@ public class PRODUCT {
         System.out.println("New Stock Added: " + newQuantity);
         System.out.println("Updated Stock: " + combinedQuantity);
         System.out.println("\n REPOSITORY");
+        System.out.println("REPOSITY");
 
         System.out.println("Previous Unit Cost: " + foundProduct.getUnitCost());
         System.out.println("New Purchase Unit Cost: " + newUnitCost);
