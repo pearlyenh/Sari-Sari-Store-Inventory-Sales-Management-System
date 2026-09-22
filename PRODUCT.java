@@ -467,6 +467,7 @@ public class PRODUCT {
 
         System.out.println("\n===== RESTOCK SUMMARY =====");
         System.out.println("\nBisaya bersionn");
+        System.out.println("Bisaya version");
         System.out.println("Previous Stock: " + foundProduct.getQuantity());
         System.out.println("Bisaya version");
         System.out.println("New Stock Added: " + newQuantity);
