@@ -466,14 +466,10 @@ public class PRODUCT {
         double updatedUnitCost = combinedInventoryCost / combinedQuantity;
 
         System.out.println("\n===== RESTOCK SUMMARY =====");
-        System.out.println("\nBisaya bersionn");
-        System.out.println("Bisaya version");
         System.out.println("Previous Stock: " + foundProduct.getQuantity());
         System.out.println("Bisaya version");
         System.out.println("New Stock Added: " + newQuantity);
         System.out.println("Updated Stock: " + combinedQuantity);
-        System.out.println("\n REPOSITORY");
-        System.out.println("REPOSITY");
 
         System.out.println("Previous Unit Cost: " + foundProduct.getUnitCost());
         System.out.println("New Purchase Unit Cost: " + newUnitCost);
@@ -492,11 +488,13 @@ public class PRODUCT {
             foundProduct.setUnitCost(updatedUnitCost);
 
             System.out.println("\nProduct restocked successfully.");
+            System.out.println("//Bisaya version of this one...");
             System.out.println("Updated Stock: " + foundProduct.getQuantity());
             System.out.println("Updated Unit Cost: " + foundProduct.getUnitCost());
 
         } else {
             System.out.println("\nRestock cancelled.");
+            System.out.println("//Bisaya version of this one...");
         }
     }
 }
