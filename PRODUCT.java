@@ -494,11 +494,6 @@ public class PRODUCT {
 
         } else {
             System.out.println("\nRestock cancelled.");
-            System.out.println("//Bisaya version of this one...");
-            System.out.println("//Bisaya version of this one...");
-            System.out.println("//Bisaya version of this one...");
-            System.out.println("//Bisaya version of this one...");
-            System.out.println("//Bisaya version of this one...");
         }
     }
 }
