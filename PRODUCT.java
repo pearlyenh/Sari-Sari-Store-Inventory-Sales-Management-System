@@ -204,6 +204,7 @@ public class PRODUCT {
                     break;
                 case 8:
                     category = "Others";
+                    System.out.println("Hello World!");
                     break;
                 default:
                     if(cChoice > 8 || cChoice == 0){
