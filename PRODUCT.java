@@ -198,6 +198,7 @@ public class PRODUCT {
                     break;
                 case 6:
                     category = "Baby Products";
+                    System.out.println("Hello World!");
                     break;
                 case 7:
                     category = "Grocery & Cooking";
